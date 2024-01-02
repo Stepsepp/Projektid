@@ -20,34 +20,41 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 /______/______/______/______/______/______/______/______/______/______/_____ /
 *******************************************************************************
 ''')
-print("Tere  tulemast Aarde jahile")
+print("Tere tulemast Aarde jahile")
 print("Sinu missioon on leida aare saarelt üles")
+
+# Funktsioon veakontrolliks
+def kehtiv_valik(valik, kehtivad_valikud):
+    return valik.lower() in kehtivad_valikud
 
 Valik_1 = input('Sa\' jõudsid saarele, kuhu sa soovid minna? Kas "Vasakule" või "Paremale".').lower()
 
-if Valik_1 == "vasakule":
-    Valik_2 = input('Sa\' jõudsid jõe äärde, seal on väikene saareke keset jõge. Kas sa soovid "Oodata" oodata paati või "Ujuda" üle jõe.').lower()
-
-    if Valik_2 == "oodata":
-        print("Jõepaat tuli ja viis sind üle jõe.")
-        Valik_3 = input("Sa jõudsid saarele, seal on maja 3 uksega: üks punane, üks kollane, üks sinine. Millise värvi sa valid?").lower()
-
-        if Valik_3 == "punane":
-            print("Sa leidsid aare! Palju õnne, võidad mängu.")
-        elif Valik_3 == "kollane":
-            print("Majast lendas välja draakon. Game Over.")
-        elif Valik_3 == "sinine":
-            print("Majast tuli välja nõid. Game Over.")
-        else:
-            print("Sa kukkusid auku. Game Over.")
-
-    elif Valik_2 == "ujuda":
-        print("Sind ründas mürgine madu. Game Over.")
-    else:
-        print("Sa kukkusid auku. Game Over.")
-
-elif Valik_1 == "paremale":
-    print("Sa sattusid sügavasse džunglisse. Game Over.")
-
+# Veakontroll
+if not kehtiv_valik(Valik_1, ["vasakule", "paremale"]):
+    print("Palun sisesta kehtiv valik.")
 else:
-    print("Sa kukkusid auku. Game Over.")
+    if Valik_1 == "vasakule":
+        Valik_2 = input('Sa\' jõudsid jõe äärde, seal on väikene saareke keset jõge. Kas sa soovid "Oodata" oodata paati või "Ujuda" üle jõe.').lower()
+
+        # Veakontroll
+        if not kehtiv_valik(Valik_2, ["oodata", "ujuda"]):
+            print("Palun sisesta kehtiv valik.")
+        else:
+            if Valik_2 == "oodata":
+                print("Jõepaat tuli ja viis sind üle jõe.")
+                Valik_3 = input("Sa jõudsid saarele, seal on maja 3 uksega: üks punane, üks kollane, üks sinine. Millise värvi sa valid?").lower()
+
+                # Veakontroll
+                if not kehtiv_valik(Valik_3, ["punane", "kollane", "sinine"]):
+                    print("Palun sisesta kehtiv valik.")
+                else:
+                    if Valik_3 == "punane":
+                        print("Sa leidsid aare! Palju õnne, võidad mängu.")
+                    elif Valik_3 == "kollane":
+                        print("Majast lendas välja draakon. Game Over.")
+                    elif Valik_3 == "sinine":
+                        print("Majast tuli välja nõid. Game Over.")
+            elif Valik_2 == "ujuda":
+                print("Sind ründas mürgine madu. Game Over.")
+    elif Valik_1 == "paremale":
+        print("Sa sattusid sügavasse džunglisse. Game Over.")
